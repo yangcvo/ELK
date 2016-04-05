@@ -1,0 +1,83 @@
+1.关闭防火墙
+#service iptables stop 
+#setenforce 0
+2.以 CentOS 下使用安装包为例，首先添加证书。
+ 
+# rpm --import https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+
+3.安装JDK
+ElasticSearch和Logstash依赖于JDK，所以需要安装JDK：
+# yum -y install java-1.8.0-openjdk*
+# java -version
+
+4.安装ElasticSearch
+（1）下载ElasticSearch    ElasticSearch默认的对外服务的HTTP端口是9200，节点间交互的TCP端口是9300。
+
+# mkdir -p /opt/software && cd /opt/software
+# sudo wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.0/elasticsearch-2.2.0.tar.gz
+# sudo tar -zxvf elasticsearch-2.2.0.tar.gz -C /usr/local/
+# ln -s /usr/local/elasticsearch-2.2.0 /usr/local/elasticsearch
+
+(2)安装elasticsearch-servicewrapper,并启动ElasticSearch服务：
+
+# sudo wget https://github.com/elasticsearch/elasticsearch-servicewrapper/archive/master.tar.gz
+# sudo tar -zxvf master.tar.gz
+# mv /opt/software/elasticsearch-servicewrapper-master/service /usr/local/elasticsearch/bin/
+# /usr/local/elasticsearch/bin/service/elasticsearch start
+ 
+ (3)配置 elasticsearch 服务随系统自动启动
+ # chkconfig --add elasticsearch
+ 
+ (4)测试ElasticSearch服务是否正常，预期返回200的状态码：如下图
+ 
+# curl -X GET http://localhost:9200 
+
+
+
+
+
+5. 安装Logstash    Logstash默认的对外服务的端口是9292
+
+下载Logstash：
+
+# sudo wget https://download.elasticsearch.org/logstash/logstash/logstash-2.2.1-1.noarch.tar.gz
+# sudo tar -zxvf logstash-2.2.1-1.noarch.tar.gz -C /usr/local/
+# ln -s /usr/local/logstash-2.2.1-1.noarch /usr/local/logstash 
+
+
+简单测试Logstash服务是否正常，预期可以将输入内容以简单的日志形式打印在界面上：
+
+# /usr/local/logstash/bin/logstash -e 'input { stdin { } } output { stdout {} }'
+
+创建Logstash配置文件，并再次测试Logstash服务是否正常，预期可以将输入内容以结构化的日志形式打印在界面上：
+
+# vim /usr/local/logstash/etc/logstash_agent.conf
+input {
+  file {
+    type => "http.access"
+    path => ["/var/log/httpd/access_log"]
+  }
+
+  file {
+    type => "http.error"
+    path => ["/var/log/httpd/error_log"]
+  }
+
+  file {
+    type => "messages"
+    path => ["/var/log/messages"]
+  }
+}
+
+output {
+  elasticsearch {
+    host => "10.111.121.22"
+    port => 9300
+  }
+}
+
+
+# nohup /usr/local/logstash/bin/logstash -f /usr/local/logstash/etc/logstash_agent.conf &
+
+
+现在，一个简单的日志分析和监控平台就搭建好了，可以使用Kibana进行查看。
