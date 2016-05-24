@@ -24,3 +24,8 @@ LTMP索引 - http://wsgzao.github.io/index/#LTMP
 * Logstash - https://www.elastic.co/downloads/logstash
 * Kibana - https://www.elastic.co/downloads/kibana
 * redis - http://redis.io/download
+
+
+个人blog：sysopen.cn   
+
+* elk的安装和使用配置，集群的搭建，tomcat，Java日志收集，都有写。
