@@ -1,4 +1,4 @@
-# 使用ELK(Elasticsearch + Logstash + Kibana) 搭建日志集中分析平台实践
+# 搭建（ElasticSearch-2.x Logstash-2.x Kibana-4.5.x zookeeper3.4.6）Kafka为消息中心的ELK日志平台
 
 ![image](https://i.v2ex.co/2Zo3bPa3.png)
 前言
@@ -6,19 +6,26 @@ Elasticsearch + Logstash + Kibana（ELK）是一套开源的日志管理方案�
 * Logstash：负责日志的收集，处理和储存
 * Elasticsearch：负责日志检索和分析
 * Kibana：负责日志的可视化
-### ELK(Elasticsearch + Logstash + Kibana)
-阅读原文 - http://wsgzao.github.io/post/elk
 
-* CentOS 7.x安装ELK(Elasticsearch+Logstash+Kibana) - 
-* * http://www.chenshake.com/centos-install-7-x-elk-elasticsearchlogstashkibana/
-     Centos 6.5 安装nginx日志分析系统 elasticsearch + logstash + redis + kibana -          
-http://blog.chinaunix.net/xmlrpc.php?r=blog/article&uid=17291169&id=4898582
-     logstash-forwarder and grok examples - https://www.ulyaoth.net/threads/logstash-forwarder-and-grok-examples.32413/
-*    三斗室 - http://chenlinux.com/
-elastic - https://www.elastic.co/guide
-LTMP索引 - http://wsgzao.github.io/index/#LTMP
 
-###组件预览
+## 介绍
+
+ELK是业界标准的日志采集，存储索引，展示分析系统解决方案
+
+logstash提供了灵活多样的插件支持不同的输入/输出
+
+主流使用redis / kafka作为日志/消息的中间环节
+
+如果已有kafka的环境了，使用kafka比使用redis更佳
+
+以下是一个最简化的配置做个笔记，弹性官网提供了非常丰富的文档
+
+不要用搜索引擎去搜索，没多少结果的，请直接看官网文档
+
+## ELK(Elasticsearch + Logstash + Kibana)
+阅读我博客原文 - [搭建（ElasticSearch-2.x Logstash-2.x Kibana-4.5.x zookeeper3.4.6）Kafka为消息中心的ELK日志平台](http://blog.yangcvo.me/2016/12/29/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%10%E5%B9%B3%E5%8F%B0/Elasticsearch/%E6%90%AD%E5%BB%BA(ElasticSearch-2.x%20Logstash-2.x%20Kibana-4.5.x%20zookeeper3.4.6)%20Kafka%E4%B8%BA%E6%B6%88%E6%81%AF%E4%B8%AD%E5%BF%83%E7%9A%84ELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/)
+
+### 组件预览
 * JDK - http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * Elasticsearch - https://www.elastic.co/downloads/elasticsearch
 * Logstash - https://www.elastic.co/downloads/logstash
@@ -26,6 +33,11 @@ LTMP索引 - http://wsgzao.github.io/index/#LTMP
 * redis - http://redis.io/download
 
 
-个人blog：sysopen.cn   
+#### 个人blog：blog.yangcvo.me  
 
 * elk的安装和使用配置，集群的搭建，tomcat，Java日志收集，都有写。
+* elk走kafka存储消费，定期清理日志。
+
+有什么问题可以联系我或者加我QQ：1155958741
+
+Mail: yangcvo@gmail.com
