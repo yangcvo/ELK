@@ -23,7 +23,7 @@ logstash提供了灵活多样的插件支持不同的输入/输出
 不要用搜索引擎去搜索，没多少结果的，请直接看官网文档
 
 ## ELK(Elasticsearch + Logstash + Kibana)
-阅读我博客原文 - [搭建（ElasticSearch-2.x Logstash-2.x Kibana-4.5.x zookeeper3.4.6）Kafka为消息中心的ELK日志平台](http://blog.yangcvo.me/2016/12/29/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%10%E5%B9%B3%E5%8F%B0/Elasticsearch/%E6%90%AD%E5%BB%BA(ElasticSearch-2.x%20Logstash-2.x%20Kibana-4.5.x%20zookeeper3.4.6)%20Kafka%E4%B8%BA%E6%B6%88%E6%81%AF%E4%B8%AD%E5%BF%83%E7%9A%84ELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/)
+阅读我博客原文 - [搭建（ElasticSearch-2.x Logstash-2.x Kibana-4.5.x zookeeper3.4.6）Kafka为消息中心的ELK日志平台](http://blog.yancy.cc/2016/12/29/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%10%E5%B9%B3%E5%8F%B0/Elasticsearch/%E6%90%AD%E5%BB%BA(ElasticSearch-2.x%20Logstash-2.x%20Kibana-4.5.x%20zookeeper3.4.6)%20Kafka%E4%B8%BA%E6%B6%88%E6%81%AF%E4%B8%AD%E5%BF%83%E7%9A%84ELK%E6%97%A5%E5%BF%97%E5%B9%B3%E5%8F%B0/)
 
 ### 组件预览
 * JDK - http://www.oracle.com/technetwork/java/javase/downloads/index.html
@@ -33,11 +33,12 @@ logstash提供了灵活多样的插件支持不同的输入/输出
 * redis - http://redis.io/download
 
 
-#### 个人blog：blog.yangcvo.me  
+#### 个人blog：blog.yancy.cc
 
 * elk的安装和使用配置，集群的搭建，tomcat，Java日志收集，都有写。
 * elk走kafka存储消费，定期清理日志。
+* zabbix monitor es 脚本。
 
-有什么问题可以联系我或者加我QQ：1155958741
+有什么问题可以联系我或者加我QQ：1165958741
 
 Mail: yangcvo@gmail.com
